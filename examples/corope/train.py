@@ -22,6 +22,7 @@ import pretraining.data as original_data
 import pretraining.model as original_model
 import torch
 import torch.distributed as dist
+import tracking
 from mcore_adapter import MCoreLocalLM
 from pretraining.data import WindowData
 from pretraining.metrics import summarize_sums
@@ -116,6 +117,7 @@ def main():
         action='store_true',
         help='Deterministic route-gather backward and CUDA math, including restart checks',
     )
+    tracking.add_arguments(p)
     a = p.parse_args()
     if a.deterministic:
         os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
@@ -220,7 +222,11 @@ def main():
 
     import megatron.core
 
-    recipe = {k: v for k, v in vars(a).items() if k not in ['output', 'resume', 'stop_after']}
+    recipe = {
+        k: v
+        for k, v in vars(a).items()
+        if k not in ['output', 'resume', 'stop_after'] and not k.startswith('wandb_')
+    }
     run = {
         'recipe': recipe,
         'spec': asdict(spec),
@@ -231,7 +237,10 @@ def main():
         'mcore': megatron.core.__version__,
         'transformer_engine': transformer_engine.__version__,
         'source_sha256': {
-            **{name: file_sha(ROOT / name) for name in ['train.py', 'mcore_adapter.py']},
+            **{
+                name: file_sha(ROOT / name)
+                for name in ['train.py', 'mcore_adapter.py', 'tracking.py']
+            },
             'original_trainer': file_sha(BASE),
             'original_model': file_sha(original_model.__file__),
             'original_data': file_sha(original_data.__file__),
@@ -265,6 +274,7 @@ def main():
         resume_seconds = time.perf_counter() - resume_start
     if rank == 0:
         save_json(out / 'run.json', run)
+    tracker = tracking.init_tracker(a, run, out) if rank == 0 else None
     elapsed_samples = []
     t_start = time.perf_counter()
     tokens_start = progress['tokens']
@@ -379,6 +389,7 @@ def main():
             event['diagnostics'] = diagnostics
         # Shared-filesystem writes must follow log_interval. Per-step atomic
         # status rewrites stall rank 0 and then every rank at the next collective.
+        tracked_event = None
         if rank == 0 and (step % a.log_interval == 0 or final):
             with (out / 'metrics.jsonl').open('a') as f:
                 f.write(json.dumps(event) + '\n')
@@ -387,17 +398,26 @@ def main():
                 {**event, 'tokens_per_second': event['effective_labels_per_second']},
             )
             print(json.dumps({k: v for k, v in event.items() if k != 'diagnostics'}), flush=True)
+            if tracker is not None:
+                tracked_event = tracking.training_metrics(event)
         if step % a.eval_interval == 0 or final:
             if rank == 0:
                 eval_start = time.perf_counter()
                 evaluation = original.evaluate(
                     model, validation, device, a.validation_windows, a.micro_batch
                 )
-                save_json(
-                    out / f'validation_step_{step}.json',
-                    dict(seconds=time.perf_counter() - eval_start, **evaluation),
-                )
+                evaluation = dict(seconds=time.perf_counter() - eval_start, **evaluation)
+                save_json(out / f'validation_step_{step}.json', evaluation)
+                if tracker is not None:
+                    tracked_event = {
+                        **(tracked_event or tracking.progress_metrics(event)),
+                        **tracking.validation_metrics(evaluation),
+                    }
             dist.barrier()
+        # Merge train and eval before committing this step, so validation is
+        # never dropped by a second W&B write at an already committed step.
+        if tracked_event is not None:
+            tracker.log(tracked_event, step=step)
         if step % a.save_interval == 0 or final:
             ckpt = out / f'step_{step:06d}'
             temporary = out / f'.step_{step:06d}.incomplete'
@@ -432,21 +452,24 @@ def main():
         if final:
             break
     if rank == 0:
-        save_json(
-            out / 'complete.json',
-            dict(
-                passed=True,
-                **progress,
-                elapsed_seconds=time.perf_counter() - t_start,
-                initialization_seconds=initialization_seconds,
-                resume_seconds=resume_seconds,
-                labels_per_second_including_eval_save=(progress['tokens'] - tokens_start)
-                / (time.perf_counter() - t_start),
-                step_seconds=elapsed_samples,
-            ),
+        completion = dict(
+            passed=True,
+            **progress,
+            elapsed_seconds=time.perf_counter() - t_start,
+            initialization_seconds=initialization_seconds,
+            resume_seconds=resume_seconds,
+            labels_per_second_including_eval_save=(progress['tokens'] - tokens_start)
+            / (time.perf_counter() - t_start),
+            step_seconds=elapsed_samples,
         )
+        save_json(out / 'complete.json', completion)
     parallel_state.destroy_model_parallel()
     dist.destroy_process_group()
+    if tracker is not None:
+        tracker.summary.update(
+            {f'completion/{k}': v for k, v in completion.items() if not isinstance(v, list)}
+        )
+        tracker.finish()
 
 
 if __name__ == '__main__':
