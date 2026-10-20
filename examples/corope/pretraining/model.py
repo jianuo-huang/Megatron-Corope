@@ -398,3 +398,14 @@ def initialize_draft(draft, root, identity):
         "loaded_keys": sorted(weights),
         "pretrain_extra": meta["extra"],
     }
+
+
+def initialize_draft_from_target(draft, root, target_path):
+    """Derive transfer identity from the actual target, including a shared head."""
+    embedding, identity = load_target_embedding(target_path)
+    del embedding
+    if LocalSpec.from_draft(draft.config).share_lm_head:
+        head, head_identity = load_target_head(target_path)
+        del head
+        identity.update(head_identity)
+    return initialize_draft(draft, root, identity)
