@@ -106,7 +106,7 @@ class DominoMoE(nn.Module):
         return (self.shared(x) + routed).reshape(shape)
 
     @torch.no_grad()
-    def update_balance(self, process_group=None):
+    def update_balance(self, process_group=None, *, collect_metrics=True):
         counts = self.pending_counts.clone()
         if dist.is_initialized():
             dist.all_reduce(counts, group=process_group)
@@ -116,6 +116,10 @@ class DominoMoE(nn.Module):
         self.routing_bias.sub_(self.routing_bias.mean())
         self.balance_updates.add_((mean > 0).to(torch.int64))
         self.pending_counts.zero_()
+        # Updating the router is part of every optimizer step. Diagnostics are
+        # read-only and only need to launch kernels on reporting steps.
+        if not collect_metrics:
+            return {}
         return {
             'moe/load_max_over_mean': counts.max() / mean.clamp_min(1),
             'moe/load_min_over_mean': counts.min() / mean.clamp_min(1),

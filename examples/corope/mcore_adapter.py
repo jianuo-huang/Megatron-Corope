@@ -217,11 +217,20 @@ class MCoreLocalLM(MegatronModule):
     def moe_modules(self):
         return [layer.mlp.experts for layer in self.layers] if self.spec.moe_config else []
 
-    def update_balance(self):
+    def update_balance(self, *, collect_metrics=True):
         metrics = {}
         for i, moe in enumerate(self.moe_modules()):
-            metrics.update({f'layer_{i}/{k}': float(v) for k, v in moe.update_balance().items()})
-        return metrics
+            metrics.update(
+                {
+                    f'layer_{i}/{k}': v
+                    for k, v in moe.update_balance(collect_metrics=collect_metrics).items()
+                }
+            )
+        # A single device-to-host copy replaces one synchronizing scalar copy
+        # per expert/metric. Preserve names, insertion order, and FP32 values.
+        if not metrics:
+            return {}
+        return dict(zip(metrics, torch.stack(list(metrics.values())).cpu().tolist()))
 
     def _mapping(self):
         mapping = {

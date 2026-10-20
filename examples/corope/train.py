@@ -126,6 +126,11 @@ def main():
     if a.deterministic:
         os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
         torch.use_deterministic_algorithms(True)
+        # Keep deterministic kernels without filling every empty allocation
+        # with NaNs/sentinels. Head chunks and MoE permutation buffers overwrite
+        # every output element before reading it; full-state regression checks
+        # cover this path. The fills otherwise consume substantial HBM bandwidth.
+        torch.utils.deterministic.fill_uninitialized_memory = False
     if a.max_tokens is not None and a.max_tokens < 1:
         raise ValueError('max_tokens must be positive')
     for key in [
@@ -318,15 +323,21 @@ def main():
             )
             for m in range(a.accumulation)
         ]
-        counts = torch.zeros(len(data.sources), device=device, dtype=torch.int64)
+        # Labels are already on the CPU. Count there, then transfer/reduce once
+        # instead of launching a scalar CUDA add for every source/microbatch.
+        local_counts = np.zeros(len(data.sources), dtype=np.int64)
         for _, labels, sources in batches:
             for i in range(len(data.sources)):
-                counts[i] += int((labels[sources == i] != -100).sum())
+                local_counts[i] += int((labels[sources == i] != -100).sum())
+        counts = torch.from_numpy(local_counts).to(device)
         dist.all_reduce(counts)
-        valid = int(counts.sum())
+        source_counts = counts.cpu().tolist()
+        valid = sum(source_counts)
         normalizer = valid / world
         if not valid:
             raise ValueError('Empty global optimizer batch')
+        final = step == stop or (a.max_tokens and progress['tokens'] + valid >= a.max_tokens)
+        report = step % a.log_interval == 0 or step % a.eval_interval == 0 or final
         lr = (
             original.learning_rate(
                 min(progress['tokens'] + valid, a.max_tokens), a.max_tokens, a.lr
@@ -346,7 +357,7 @@ def main():
         else:
             optimizer.zero_grad(set_to_none=True)
         collect = not a.no_position_metrics and step % a.log_interval == 0
-        loss_sum = torch.zeros((), device=device)
+        loss_sum = torch.zeros((), device=device) if report else None
         metric_sums = (
             torch.zeros((3, len(data.sources), a.window - 1), device=device, dtype=torch.float64)
             if collect
@@ -355,8 +366,8 @@ def main():
         for m, (ids, labels, sources) in enumerate(batches):
             sync = wrapped.no_sync() if m + 1 < len(batches) else nullcontext()
             with sync, torch.autocast('cuda', dtype=torch.bfloat16):
-                ids = torch.from_numpy(ids).to(device)
-                labels = torch.from_numpy(labels).to(device)
+                ids = torch.from_numpy(ids).to(device, non_blocking=True)
+                labels = torch.from_numpy(labels).to(device, non_blocking=True)
                 kwargs = dict(
                     sources=torch.from_numpy(sources).to(device) if collect else None,
                     return_metrics=collect,
@@ -373,17 +384,19 @@ def main():
                     loss = value
                 backward_loss = loss / normalizer if a.engine == 'hf-chunked' else loss
             backward_loss.backward()
-            loss_sum += backward_loss.detach() * normalizer
+            if report:
+                loss_sum += backward_loss.detach() * normalizer
         if a.engine == 'mcore':
             wrapped.finish_grad_sync()
             success, norm, _ = optimizer.step()
             if not success:
                 raise RuntimeError('Optimizer skipped a step')
-            balance_metrics = model.update_balance()
+            balance_metrics = model.update_balance(collect_metrics=report)
         else:
             norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
-        dist.all_reduce(loss_sum)
+        if report:
+            dist.all_reduce(loss_sum)
         if collect:
             dist.all_reduce(metric_sums)
         torch.cuda.synchronize()
@@ -394,26 +407,27 @@ def main():
         progress = {
             'step': step,
             'tokens': progress['tokens'] + valid,
-            'source_tokens': [x + y for x, y in zip(progress['source_tokens'], counts.tolist())],
+            'source_tokens': [x + y for x, y in zip(progress['source_tokens'], source_counts)],
         }
         if sampler:
             progress['sampler'] = sampler.state_dict()
-        final = step == stop or (a.max_tokens and progress['tokens'] >= a.max_tokens)
-        event = {
-            **progress,
-            'loss': float(loss_sum / valid),
-            'lr': lr,
-            'grad_norm': float(norm),
-            'valid_labels': valid,
-            'step_seconds': step_seconds,
-            'effective_labels_per_second': valid / step_seconds,
-            'position_metrics': collect,
-            'peak_allocated_mib': torch.cuda.max_memory_allocated() / 2**20,
-        }
-        if sampler:
-            event['data_coverage'] = sampler.metrics(progress['source_tokens'])
-        if a.engine == 'mcore' and balance_metrics:
-            event['moe'] = balance_metrics
+        event = None
+        if report:
+            event = {
+                **progress,
+                'loss': float(loss_sum / valid),
+                'lr': lr,
+                'grad_norm': float(norm),
+                'valid_labels': valid,
+                'step_seconds': step_seconds,
+                'effective_labels_per_second': valid / step_seconds,
+                'position_metrics': collect,
+                'peak_allocated_mib': torch.cuda.max_memory_allocated() / 2**20,
+            }
+            if sampler:
+                event['data_coverage'] = sampler.metrics(progress['source_tokens'])
+            if a.engine == 'mcore' and balance_metrics:
+                event['moe'] = balance_metrics
         if collect:
             diagnostics = summarize_sums(metric_sums.cpu(), data.sources)
             if abs(diagnostics['loss'] - event['loss']) > 2e-4:
