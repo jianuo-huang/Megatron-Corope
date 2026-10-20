@@ -59,6 +59,9 @@ class DominoMoE(nn.Module):
         )
         self._balance_mask = None
         self.last_indices = None
+        # Explicit training experiment; None preserves the input-dtype path.
+        # Master parameters, routing and route reduction remain FP32.
+        self.expert_compute_dtype = None
 
     def _apply(self, fn, recurse=True):
         bias = self.routing_bias.clone()
@@ -88,13 +91,19 @@ class DominoMoE(nn.Module):
         order = torch.argsort(flat_ids, stable=True)
         counts = torch.bincount(flat_ids, minlength=self.experts)
         offsets = counts.cumsum(0).to(torch.int32)
-        dispatched = x.index_select(0, order // self.topk)
+        expert_dtype = self.expert_compute_dtype or x.dtype
+        # Cast after gathering so repeated-token input gradients accumulate
+        # in the original input dtype, rather than in BF16 route slots.
+        dispatched = x.index_select(0, order // self.topk).to(expert_dtype)
         up, gate = torch._grouped_mm(
-            dispatched, self.up_gate.to(x.dtype).transpose(-1, -2), offs=offsets
+            dispatched, self.up_gate.to(expert_dtype).transpose(-1, -2), offs=offsets
         ).chunk(2, dim=-1)
+        if self.expert_compute_dtype is not None:
+            # Keep SwiGLU arithmetic in FP32 between the BF16 GEMMs.
+            up, gate = up.float(), gate.float()
         activation = (F.silu(gate) * up).contiguous()
         values = torch._grouped_mm(
-            activation, self.down.to(x.dtype).transpose(-1, -2), offs=offsets
+            activation.to(expert_dtype), self.down.to(expert_dtype).transpose(-1, -2), offs=offsets
         )
         # Restore route slots before summing, with FP32 weights and reduction.
         restored = torch.empty_like(values).index_copy(0, order, values)

@@ -101,6 +101,12 @@ def main():
     p.add_argument('--weight-decay', type=float, default=0.1)
     p.add_argument('--seed', type=int, default=42)
     p.add_argument('--chunk-size', type=int, default=512)
+    p.add_argument(
+        '--moe-expert-dtype',
+        choices=['input', 'bfloat16'],
+        default='input',
+        help='Opt-in expert GEMM precision; FP32 master weights/router/reduction are retained',
+    )
     p.add_argument('--log-interval', type=int, default=50)
     p.add_argument('--eval-interval', type=int, default=1000)
     p.add_argument('--save-interval', type=int, default=1000)
@@ -184,6 +190,8 @@ def main():
             accumulation=a.accumulation,
         )
     spec = LocalSpec.from_draft(json.loads(Path(a.draft_config).read_text()))
+    if a.moe_expert_dtype != 'input' and (a.engine != 'mcore' or not spec.moe_config):
+        raise ValueError('--moe-expert-dtype requires an MCore MoE model')
     if spec.moe_config and a.engine != 'mcore':
         raise ValueError('MoE training is validated through the MCore engine only')
     embedding, identity = load_target_embedding(a.target)
@@ -205,6 +213,8 @@ def main():
         model.load_hf_weights(weights)
         del hf, weights
         model.chunk_size = a.chunk_size
+        for moe in model.moe_modules():
+            moe.expert_compute_dtype = torch.bfloat16 if a.moe_expert_dtype == 'bfloat16' else None
         ddp_config = DistributedDataParallelConfig(
             grad_reduce_in_fp32=True,
             overlap_grad_reduce=False,
