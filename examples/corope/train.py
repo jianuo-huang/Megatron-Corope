@@ -377,17 +377,16 @@ def main():
             if abs(diagnostics['loss'] - event['loss']) > 2e-4:
                 raise ValueError('Training and position losses disagree')
             event['diagnostics'] = diagnostics
-        if rank == 0:
+        # Shared-filesystem writes must follow log_interval. Per-step atomic
+        # status rewrites stall rank 0 and then every rank at the next collective.
+        if rank == 0 and (step % a.log_interval == 0 or final):
             with (out / 'metrics.jsonl').open('a') as f:
                 f.write(json.dumps(event) + '\n')
             save_json(
                 out / 'status.json',
                 {**event, 'tokens_per_second': event['effective_labels_per_second']},
             )
-            if step % a.log_interval == 0 or final:
-                print(
-                    json.dumps({k: v for k, v in event.items() if k != 'diagnostics'}), flush=True
-                )
+            print(json.dumps({k: v for k, v in event.items() if k != 'diagnostics'}), flush=True)
         if step % a.eval_interval == 0 or final:
             if rank == 0:
                 eval_start = time.perf_counter()
