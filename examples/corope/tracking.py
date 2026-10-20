@@ -45,6 +45,7 @@ def training_metrics(event):
     # Keep the actual optimizer-batch loss, rather than its diagnostic reduction.
     values['train/loss'] = event['loss']
     values.update(flatten('train', event.get('moe', {})))
+    values.update(flatten('data', event.get('data_coverage', {})))
     for source, tokens in zip(SOURCES, event.get('source_tokens', [])):
         values[f'progress/{source}_tokens'] = tokens
     return {**values, **progress_metrics(event)}
@@ -64,7 +65,7 @@ def define_metrics(tracker):
     tracker.define_metric('progress/step')
     tracker.define_metric('progress/tokens')
     tracker.define_metric('progress/billion_tokens')
-    for prefix in ('train', 'eval', 'validation', 'timing'):
+    for prefix in ('train', 'eval', 'validation', 'timing', 'data'):
         tracker.define_metric(f'{prefix}/*', step_metric='progress/tokens')
 
 

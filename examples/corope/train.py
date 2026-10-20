@@ -20,6 +20,7 @@ import frozen_head_ce
 import numpy as np
 import pretraining.data as original_data
 import pretraining.model as original_model
+import pretraining.shuffled as shuffled_data
 import torch
 import torch.distributed as dist
 import tracking
@@ -35,6 +36,7 @@ from pretraining.model import (
     read_expert,
     transferable,
 )
+from pretraining.shuffled import GlobalShuffledWindowSampler
 from safetensors.torch import load_file
 
 from megatron.core import dist_checkpointing, parallel_state, tensor_parallel
@@ -87,6 +89,8 @@ def main():
     p.add_argument('--draft-config', required=True)
     p.add_argument('--target', required=True, help='Local target model/tokenizer directory')
     p.add_argument('--data', required=True)
+    p.add_argument('--sampler', choices=['replacement', 'global-shuffle'], default='replacement')
+    p.add_argument('--shuffle-cache')
     p.add_argument('--output', required=True)
     p.add_argument('--window', type=int, choices=[8, 64], required=True)
     p.add_argument('--micro-batch', type=int, required=True)
@@ -161,6 +165,19 @@ def main():
     dist.barrier()
     if data.window != a.window:
         raise ValueError('Data window mismatch')
+    sampler = None
+    if a.sampler == 'global-shuffle':
+        if not a.shuffle_cache:
+            raise ValueError('--shuffle-cache is required')
+        sampler = GlobalShuffledWindowSampler(
+            data,
+            a.shuffle_cache,
+            seed=a.seed,
+            world_size=world,
+            rank=rank,
+            micro_batch=a.micro_batch,
+            accumulation=a.accumulation,
+        )
     spec = LocalSpec.from_draft(json.loads(Path(a.draft_config).read_text()))
     if spec.moe_config and a.engine != 'mcore':
         raise ValueError('MoE training is validated through the MCore engine only')
@@ -249,9 +266,12 @@ def main():
         'trainable_parameters': sum(p.numel() for p in model.parameters() if p.requires_grad),
         'normalization': 'loss divided by global_valid/world, then DDP averages once',
     }
+    run['source_sha256']['shuffled_data'] = file_sha(shuffled_data.__file__)
     for name in ['domino_context.py', 'domino_moe.py']:
         run['source_sha256'][name] = file_sha(ROOT / name)
     progress = {'step': 0, 'tokens': 0, 'source_tokens': [0] * len(data.sources)}
+    if sampler:
+        progress['sampler'] = sampler.state_dict()
     resume_seconds = None
     if a.resume:
         resume_start = time.perf_counter()
@@ -262,6 +282,10 @@ def main():
         progress = checkpoint(
             model, optimizer, Path(a.resume) / 'distributed', progress, run, loading=True
         )
+        if sampler:
+            sampler.load_state_dict(progress['sampler'])
+            if sampler.next_micro != progress['step'] * a.accumulation:
+                raise ValueError('Checkpoint sampler step differs')
         rng = torch.load(
             Path(a.resume) / f'rng_rank{rank}.pt', weights_only=False, map_location='cpu'
         )
@@ -287,7 +311,11 @@ def main():
     for step in itertools.count(progress['step'] + 1):
         started = time.perf_counter()
         batches = [
-            data.sample(a.micro_batch, seed=a.seed, step=step, micro=m, rank=rank)
+            (
+                sampler.sample(step=step, micro=m)
+                if sampler
+                else data.sample(a.micro_batch, seed=a.seed, step=step, micro=m, rank=rank)
+            )
             for m in range(a.accumulation)
         ]
         counts = torch.zeros(len(data.sources), device=device, dtype=torch.int64)
@@ -368,6 +396,8 @@ def main():
             'tokens': progress['tokens'] + valid,
             'source_tokens': [x + y for x, y in zip(progress['source_tokens'], counts.tolist())],
         }
+        if sampler:
+            progress['sampler'] = sampler.state_dict()
         final = step == stop or (a.max_tokens and progress['tokens'] >= a.max_tokens)
         event = {
             **progress,
@@ -380,6 +410,8 @@ def main():
             'position_metrics': collect,
             'peak_allocated_mib': torch.cuda.max_memory_allocated() / 2**20,
         }
+        if sampler:
+            event['data_coverage'] = sampler.metrics(progress['source_tokens'])
         if a.engine == 'mcore' and balance_metrics:
             event['moe'] = balance_metrics
         if collect:

@@ -82,6 +82,8 @@ def main():
         'grad_norm',
         'diagnostics',
         'moe',
+        'sampler',
+        'data_coverage',
     ]
     equal(*[[{k: e[k] for k in fields if k in e} for e in es] for es in events])
     result['per_step_losses_grad_norms_counts_diagnostics_bitwise_equal'] = True
