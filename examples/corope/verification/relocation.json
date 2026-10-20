@@ -1,0 +1,191 @@
+{
+  "date": "2026-10-20",
+  "implementation_commit": "b3576036190f045a9f63bf2043ce57ca3ad0abfa",
+  "upstream_base": "4b4acac9a1d28ea6829c8d4f566d75698a21249d",
+  "unit_tests": {
+    "passed": 27,
+    "skipped": 0,
+    "includes_real_tokenizer_and_external_joint_loader": true
+  },
+  "gpu_gate": {
+    "resume_passed": true,
+    "precision_change_rejected": true,
+    "relocated_export_sha256": "9d57291d0bdf1771fe58f26725f6e0a10a363ed6d6358a1c194047eba6ec0d8e",
+    "reference_export_sha256": "9d57291d0bdf1771fe58f26725f6e0a10a363ed6d6358a1c194047eba6ec0d8e",
+    "pre_relocation_export_identical": true
+  },
+  "resume": {
+    "export_tensors_bitwise_equal": 19,
+    "distributed_tensors_bitwise_equal": 20,
+    "common_state_tensors_bitwise_equal": 0,
+    "rng_tensors_bitwise_equal": 10,
+    "per_step_losses_grad_norms_counts_diagnostics_bitwise_equal": true,
+    "progress": {
+      "step": 6,
+      "tokens": 2858,
+      "source_tokens": [
+        1835,
+        452,
+        571
+      ]
+    },
+    "original_joint_loader_tensors_exact": 19,
+    "joint_loader": {
+      "weight_sha256": "9d57291d0bdf1771fe58f26725f6e0a10a363ed6d6358a1c194047eba6ec0d8e",
+      "loaded_keys": [
+        "context_transformer.final_norm.weight",
+        "context_transformer.input_proj.weight",
+        "context_transformer.layers.0.input_layernorm.weight",
+        "context_transformer.layers.0.mlp.balance_updates",
+        "context_transformer.layers.0.mlp.down",
+        "context_transformer.layers.0.mlp.router.weight",
+        "context_transformer.layers.0.mlp.routing_bias",
+        "context_transformer.layers.0.mlp.shared.down_proj.weight",
+        "context_transformer.layers.0.mlp.shared.gate_proj.weight",
+        "context_transformer.layers.0.mlp.shared.up_proj.weight",
+        "context_transformer.layers.0.mlp.up_gate",
+        "context_transformer.layers.0.post_attention_layernorm.weight",
+        "context_transformer.layers.0.self_attn.k_norm.weight",
+        "context_transformer.layers.0.self_attn.k_proj.weight",
+        "context_transformer.layers.0.self_attn.o_proj.weight",
+        "context_transformer.layers.0.self_attn.q_norm.weight",
+        "context_transformer.layers.0.self_attn.q_proj.weight",
+        "context_transformer.layers.0.self_attn.v_proj.weight",
+        "embed_proj.0.weight"
+      ],
+      "pretrain_extra": {
+        "step": 6,
+        "tokens": 2858,
+        "source_tokens": [
+          1835,
+          452,
+          571
+        ],
+        "sampler": {
+          "algorithm": "pcg64-global-domain-permutation-v1",
+          "data_sha256": "984e8bf301473fc01f44df5ad89b97df6f728563be16fe7dcf43f9d3803675d2",
+          "seed": 42,
+          "world_size": 2,
+          "micro_batch": 2,
+          "accumulation": 2,
+          "next_micro": 12,
+          "source_draws": [
+            30,
+            8,
+            10
+          ]
+        },
+        "data_sha256": "984e8bf301473fc01f44df5ad89b97df6f728563be16fe7dcf43f9d3803675d2",
+        "pretrain_window_tokens": 64
+      }
+    },
+    "joint_loader_checked": true,
+    "passed": true
+  },
+  "model_checks": {
+    "dense1536": {
+      "feature_relative_rms": 0.0,
+      "grad_relative_rms": {
+        "context_transformer.input_proj.weight": 0.006571679841727018,
+        "context_transformer.final_norm.weight": 0.0,
+        "embed_proj.0.weight": 0.0,
+        "context_transformer.layers.0.input_layernorm.weight": 0.005814522970467806,
+        "context_transformer.layers.0.self_attn.o_proj.weight": 0.0038760853931307793,
+        "context_transformer.layers.0.self_attn.q_norm.weight": 0.005305028520524502,
+        "context_transformer.layers.0.self_attn.k_norm.weight": 0.005148786585777998,
+        "context_transformer.layers.0.post_attention_layernorm.weight": 0.002411584835499525,
+        "context_transformer.layers.0.mlp.down_proj.weight": 2.1469753846758977e-05,
+        "context_transformer.layers.0.self_attn.q_proj.weight": 0.005953256040811539,
+        "context_transformer.layers.0.self_attn.k_proj.weight": 0.0059141176752746105,
+        "context_transformer.layers.0.self_attn.v_proj.weight": 0.005003821570426226,
+        "context_transformer.layers.0.mlp.gate_proj.weight": 2.3137867174227722e-05,
+        "context_transformer.layers.0.mlp.up_proj.weight": 2.5558085326338187e-05
+      },
+      "trainable_parameters": 40899328,
+      "export_tensors": 14,
+      "grouped_future_prefix_relative_rms": 0.0,
+      "grouped_other_windows_relative_rms": 0.0,
+      "causal_and_window_isolation": true,
+      "passed": true
+    },
+    "moe1536": {
+      "feature_relative_rms": 0.003915176261216402,
+      "grad_relative_rms": {
+        "context_transformer.input_proj.weight": 0.006596206687390804,
+        "context_transformer.final_norm.weight": 0.0028803590685129166,
+        "embed_proj.0.weight": 0.003911957610398531,
+        "context_transformer.layers.0.input_layernorm.weight": 0.005691852420568466,
+        "context_transformer.layers.0.self_attn.o_proj.weight": 0.003903792705386877,
+        "context_transformer.layers.0.self_attn.q_norm.weight": 0.005267268978059292,
+        "context_transformer.layers.0.self_attn.k_norm.weight": 0.004849978722631931,
+        "context_transformer.layers.0.post_attention_layernorm.weight": 0.0022267745807766914,
+        "context_transformer.layers.0.mlp.up_gate": 0.0016648261807858944,
+        "context_transformer.layers.0.mlp.down": 0.0016655187355354428,
+        "context_transformer.layers.0.mlp.router.weight": 0.0016495621530339122,
+        "context_transformer.layers.0.mlp.shared.up_proj.weight": 0.002563983667641878,
+        "context_transformer.layers.0.mlp.shared.gate_proj.weight": 0.0026966736186295748,
+        "context_transformer.layers.0.mlp.shared.down_proj.weight": 0.0014509182656183839,
+        "context_transformer.layers.0.self_attn.q_proj.weight": 0.0059300437569618225,
+        "context_transformer.layers.0.self_attn.k_proj.weight": 0.005888763815164566,
+        "context_transformer.layers.0.self_attn.v_proj.weight": 0.005022520665079355
+      },
+      "trainable_parameters": 102265600,
+      "export_tensors": 19,
+      "routing_counts_and_updates_exact": true,
+      "grouped_future_prefix_relative_rms": 9.216128091793507e-05,
+      "grouped_other_windows_relative_rms": 9.789547766558826e-05,
+      "fixed_shape_oracle_relative_rms": 0.004750808700919151,
+      "causal_and_window_isolation": true,
+      "passed": true
+    }
+  },
+  "pre_relocation_metrics": {
+    "passed": true,
+    "recorded_steps": 3,
+    "all_numerical_fields_equal": true,
+    "fields": [
+      "step",
+      "tokens",
+      "source_tokens",
+      "valid_labels",
+      "loss",
+      "lr",
+      "grad_norm",
+      "diagnostics",
+      "moe",
+      "sampler",
+      "data_coverage"
+    ]
+  },
+  "imports_from_this_checkout": {
+    "megatron.core": "megatron/core/__init__.py",
+    "mcore_adapter": "examples/corope/mcore_adapter.py",
+    "pretraining.model": "examples/corope/pretraining/model.py",
+    "pretraining.data": "examples/corope/pretraining/data.py",
+    "pretraining.shuffled": "examples/corope/pretraining/shuffled.py",
+    "domino_moe": "examples/corope/domino_moe.py",
+    "frozen_head_ce": "examples/corope/frozen_head_ce.py"
+  },
+  "runtime_packages": {
+    "torch": "2.11.0",
+    "megatron-core": "0.19.2",
+    "transformer-engine": "2.20.2",
+    "transformers": "5.12.1",
+    "liger-kernel": "0.8.2",
+    "numpy": "2.3.5",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.22.2",
+    "pyarrow": "24.0.0",
+    "requests": "2.34.2",
+    "wandb": "0.28.1",
+    "triton": "3.6.0",
+    "pytest": "9.1.1"
+  },
+  "runtime": "Existing CUDA 13 training container; a fresh dependency installation was not tested.",
+  "formatters": {
+    "isort": "6.0.1",
+    "black": "26.10.1",
+    "checks": "passed"
+  },
+  "training_code_changed_by_documentation_commit": false
+}

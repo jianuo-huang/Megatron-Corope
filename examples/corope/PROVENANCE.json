@@ -1,0 +1,261 @@
+{
+  "upstream": {
+    "upstream": "NVIDIA/Megatron-LM",
+    "tag": "core_v0.19.2",
+    "commit": "4b4acac9a1d28ea6829c8d4f566d75698a21249d",
+    "tree": "d1d39cbb009afc82afd90155c7d9ba238cc85319",
+    "archive_sha256": "add9a896e4571990d6e0a7fcf5a3ba80584db9f4247f0a57e7d0af8b1dc86177",
+    "exact_signed_commit_imported": true,
+    "shallow_base": true
+  },
+  "import_source": "https://github.com/jianuo-huang/Dmax-DFlash",
+  "import_source_license": "MIT; see LICENSES/SpecForge-MIT.txt",
+  "imports": [
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "specforge/pretraining/data.py",
+      "destination": "examples/corope/pretraining/data.py",
+      "original_sha256": "31496c9a4b770dcfe2177d6440c1ff72ed7fb89e13da2cb225037eb4802f703b",
+      "destination_sha256_at_packaging": "8d6dfad6d4457a40ede2c775482fa7bf64d163fcac49f0ad91357cd882e4907d"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "specforge/pretraining/metrics.py",
+      "destination": "examples/corope/pretraining/metrics.py",
+      "original_sha256": "63fd313cf242276faf0942eac02b02932b4a818c17839679140dfba06b007f5c",
+      "destination_sha256_at_packaging": "39a5745486478fbce0c6a52f86e06e8a30c3e0c4e6abc704954bc864305f32f2"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "specforge/pretraining/__init__.py",
+      "destination": "examples/corope/pretraining/__init__.py",
+      "original_sha256": "765167df2d9e7218a9f647e336bae7cff5fe7e1fbcaefc0b5ddc0fde20303b06",
+      "destination_sha256_at_packaging": "765167df2d9e7218a9f647e336bae7cff5fe7e1fbcaefc0b5ddc0fde20303b06"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "scripts/prepare_domino_pretrain_data.py",
+      "destination": "examples/corope/prepare_domino_pretrain_data.py",
+      "original_sha256": "ce759c751e82ceea4768e30cf2af014a77fc6abb40fffb3eeb3e8bd6e4966705",
+      "destination_sha256_at_packaging": "14119fa186c44e82f992574cf063e555f20c32a1158a5e652f70d7a0ea782c1d"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "scripts/prepare_domino_pretrain_scale.py",
+      "destination": "examples/corope/prepare_domino_pretrain_scale.py",
+      "original_sha256": "45c35e3825c401c142d472e0f936aabcebefd8357785dbaa39ce995527f85357",
+      "destination_sha256_at_packaging": "0b88a68941b12c870e7f1e3ade100d8c92b4c0ae8597bee84db7b2b2e202d66c"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "scripts/fetch_domino_pretrain_pilot.py",
+      "destination": "examples/corope/fetch_domino_pretrain_pilot.py",
+      "original_sha256": "f6bb5c9dfba61a445fb8e631923648aff89e9856f0201a7390f30a3c1d71c920",
+      "destination_sha256_at_packaging": "79c7b150aaf292da400b6c7ae121a85605021953f16b08cb3ff94eba76325812"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "specforge/domino_context.py",
+      "destination": "examples/corope/domino_context.py",
+      "original_sha256": "5af7c0eecbca19dc9d662e6514e3311225add3a86839f1c26cbdec5a9fb412b5",
+      "destination_sha256_at_packaging": "5dc4bb6231d77df55ed2c092a14c6ba8a0986c8ac5cbedfea6566404a26d9944"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "specforge/pretraining/model.py",
+      "destination": "examples/corope/pretraining/model.py",
+      "original_sha256": "9737e083abd8340aa201638bfc863843b000d449e94b8cec2c0127124b327b6b",
+      "destination_sha256_at_packaging": "752dbdfe484f45ba49f7cc8fd294e253c66b19ccb8e4109261b882a5c941cfe4"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "scripts/pretrain_domino_context.py",
+      "destination": "examples/corope/reference_train.py",
+      "original_sha256": "278d7be53ae39c1255c4967e9a4cfafb6b41c20a6f46c901aa7e00e236dc17d2",
+      "destination_sha256_at_packaging": "b893d2ba0910cc31b817a0a7160fcdf02491d2a7fb7deb675f8ffc9c4da1347b"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "configs/qwen3-8b/qwen3-8b-dflash-bs8-domino-transformer-block-context.json",
+      "destination": "examples/corope/configs/reference.json",
+      "original_sha256": "8c2e6c9cecd74a844810eec1d8dd9897de6b3f65c7702789820f7c851751c3bd",
+      "destination_sha256_at_packaging": "8c2e6c9cecd74a844810eec1d8dd9897de6b3f65c7702789820f7c851751c3bd"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "tests/test_utils/test_domino_pretraining.py",
+      "destination": "examples/corope/tests/test_reference.py",
+      "original_sha256": "381e2b5442623adcaf7229a2993ace5835298c941280af2bb040227e2ead0222",
+      "destination_sha256_at_packaging": "ebe7b9cee67d0ddef77e4937d393ede4efdad878a3f49eae96beae3c1d75f1d9"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "tests/test_utils/test_domino_pretraining_scale.py",
+      "destination": "examples/corope/tests/test_scale.py",
+      "original_sha256": "5d8b122f73273d2550a04c8765a92f126f1d1ecd2f354024f99ed26b5eaca67e",
+      "destination_sha256_at_packaging": "eafb80821f01c01673ff3c7ffe8f647794be84fa79f718bba272b1efc7e06cc0"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "tests/test_utils/test_domino_pretraining_logging.py",
+      "destination": "examples/corope/tests/test_reference_metrics.py",
+      "original_sha256": "abeada71dbe5a68eab8eb4c1db73eff0100f2b4ca0e1712e84686bc34055a669",
+      "destination_sha256_at_packaging": "970b8185868646abdb22c1f262c2cade4473f3a59ee6e772739fae52f5f313f3"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "specforge/domino_moe.py",
+      "destination": "examples/corope/domino_moe.py",
+      "original_sha256": "9ab423b5d1e3fb844632f905d5b0164bfbed6a37892a2c7f833b80b11e5db4cb",
+      "destination_sha256_at_packaging": "bdc58260ceb90b1e1c3d0c7d05596483d8748728cc2e95a5433db0a045df046c"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "mcore_pretrain/frozen_head_ce.py",
+      "destination": "examples/corope/frozen_head_ce.py",
+      "original_sha256": "81d79f1409ebdd96c1fdc1c905b9af9b3595a052d223a678b86bbf88f391712c",
+      "destination_sha256_at_packaging": "25aa099f46cef9c57e2f1fd2645f65210d67ae06a50d3cb23a0cf7eb777b8b97"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "mcore_pretrain/mcore_adapter.py",
+      "destination": "examples/corope/mcore_adapter.py",
+      "original_sha256": "32d7e639fee2666b70b9e863ebc72b9caeec48de889d1fd9a35b4544bfdaec65",
+      "destination_sha256_at_packaging": "c25a895784f678fdb99a9833704549d9856211150fdc2135f117fa056ebbdc4e"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "mcore_pretrain/check_models.py",
+      "destination": "examples/corope/check_models.py",
+      "original_sha256": "6b8ad22e42310cabdb8c91ad71f67c8e608680133c9439e1576f2edff2058afc",
+      "destination_sha256_at_packaging": "0c40110051f172596ec7b6d0f3e1a87408e3aaa7a8c0e0e6ad233c6a1ddc6a31"
+    },
+    {
+      "source_commit": "04f69f72cf0d2cc46eaf99b44ba69bd30b111f8d",
+      "source_path": "mcore_pretrain/train.py",
+      "destination": "examples/corope/train.py",
+      "original_sha256": "d14aa21f7d5edfd70c16064bdaa35c58f40e4b4f09a20ddf01029cf353a68348",
+      "destination_sha256_at_packaging": "e5fbee1cbac39050ace26afa33226eeda311ed9cc60b29c64c9d1117b27d906d"
+    },
+    {
+      "source_commit": "696f5b7f1ebc8258ed6b6b63367a839b6655ffa0",
+      "source_path": "specforge/pretraining/model.py",
+      "destination": "examples/corope/pretraining/model.py",
+      "original_sha256": "f1dca026a51ddd7cbad31671684933a22ddb04ae289fe3d2a2db21663b0a6dfa",
+      "destination_sha256_at_packaging": "752dbdfe484f45ba49f7cc8fd294e253c66b19ccb8e4109261b882a5c941cfe4"
+    },
+    {
+      "source_commit": "696f5b7f1ebc8258ed6b6b63367a839b6655ffa0",
+      "source_path": "mcore_pretrain/check_resume.py",
+      "destination": "examples/corope/check_resume.py",
+      "original_sha256": "e245ed4cbf44c3947b3664a768c7f9d73c2d08749d41ea80cdc7507da0f36224",
+      "destination_sha256_at_packaging": "3a8a2c43938ed17909d0060a5abcdf35c79e3e80c23f52cf5a94771a0d103ffd"
+    },
+    {
+      "source_commit": "ceb76c79e46fb3641602fcd591ce6da35e07138c",
+      "source_path": "mcore_pretrain/train.py",
+      "destination": "examples/corope/train.py",
+      "original_sha256": "7c1af979dadc149beddad499993835044b8382c3922dcf8f701adbb00d4a6591",
+      "destination_sha256_at_packaging": "e5fbee1cbac39050ace26afa33226eeda311ed9cc60b29c64c9d1117b27d906d"
+    },
+    {
+      "source_commit": "8f6f2174f1e7a31322836831ec0ec7f6fd83b4c1",
+      "source_path": "mcore_pretrain/train.py",
+      "destination": "examples/corope/train.py",
+      "original_sha256": "337191358188aa8541f9ed57eddd198a93ba7ebabe4be4915a2ebf1fd5f504bb",
+      "destination_sha256_at_packaging": "e5fbee1cbac39050ace26afa33226eeda311ed9cc60b29c64c9d1117b27d906d"
+    },
+    {
+      "source_commit": "8f6f2174f1e7a31322836831ec0ec7f6fd83b4c1",
+      "source_path": "mcore_pretrain/tracking.py",
+      "destination": "examples/corope/tracking.py",
+      "original_sha256": "adc45143ef2270016403c8154b3e03a82ab96e1d16ac279ce792c9f350cee289",
+      "destination_sha256_at_packaging": "9276b8fe6607547fb14d3c309d3aaa951cf763acc68949b4cde4b027ea57dbbf"
+    },
+    {
+      "source_commit": "5cedb317fd4f9d23e10a71f626e34d4447cf4fef",
+      "source_path": "specforge/pretraining/shuffled.py",
+      "destination": "examples/corope/pretraining/shuffled.py",
+      "original_sha256": "814aa6f00d288c7f8f52639e7c401cd5bfcd92085298b4f45d72db3c943ae75a",
+      "destination_sha256_at_packaging": "9aa140d210c8366c7a3d557b222d315e1737275a4c65ae94a9c7388983debc2d"
+    },
+    {
+      "source_commit": "5cedb317fd4f9d23e10a71f626e34d4447cf4fef",
+      "source_path": "mcore_pretrain/train.py",
+      "destination": "examples/corope/train.py",
+      "original_sha256": "d84e4b18b2230207033c6255c2e15949b8b5687e9516807c659a54a1e5309bd5",
+      "destination_sha256_at_packaging": "e5fbee1cbac39050ace26afa33226eeda311ed9cc60b29c64c9d1117b27d906d"
+    },
+    {
+      "source_commit": "5cedb317fd4f9d23e10a71f626e34d4447cf4fef",
+      "source_path": "mcore_pretrain/tracking.py",
+      "destination": "examples/corope/tracking.py",
+      "original_sha256": "c03e93c49aa088b1252b872876110e6a020da7bbeb08c357e5a8f52245eed201",
+      "destination_sha256_at_packaging": "9276b8fe6607547fb14d3c309d3aaa951cf763acc68949b4cde4b027ea57dbbf"
+    },
+    {
+      "source_commit": "5cedb317fd4f9d23e10a71f626e34d4447cf4fef",
+      "source_path": "tests/test_utils/test_global_shuffled_pretraining.py",
+      "destination": "examples/corope/tests/test_shuffled.py",
+      "original_sha256": "f8b6355baa6929204eca58317ac3f67a6344c2de955e71b712d1a895bf5a03c2",
+      "destination_sha256_at_packaging": "d05d5dbc9c3951d674ddfe40ea628dd8da1ae1f67f5386a02f2ab565bf6e06d7"
+    },
+    {
+      "source_commit": "b56e24041d0f5cb9025543616aa900b25f1679d5",
+      "source_path": "mcore_pretrain/train.py",
+      "destination": "examples/corope/train.py",
+      "original_sha256": "984da93598bc563299afd78ecfe60d0bb5ab102691feccc0e58bb94c2cd08df7",
+      "destination_sha256_at_packaging": "e5fbee1cbac39050ace26afa33226eeda311ed9cc60b29c64c9d1117b27d906d"
+    },
+    {
+      "source_commit": "b56e24041d0f5cb9025543616aa900b25f1679d5",
+      "source_path": "mcore_pretrain/mcore_adapter.py",
+      "destination": "examples/corope/mcore_adapter.py",
+      "original_sha256": "ee0dffa30df391e3c9f1518426c2f4db6bdfa403804f9ade9c7cfac881eee3aa",
+      "destination_sha256_at_packaging": "c25a895784f678fdb99a9833704549d9856211150fdc2135f117fa056ebbdc4e"
+    },
+    {
+      "source_commit": "b56e24041d0f5cb9025543616aa900b25f1679d5",
+      "source_path": "specforge/domino_moe.py",
+      "destination": "examples/corope/domino_moe.py",
+      "original_sha256": "1cf3626ec7506c08313f6809b1b3d47e74b4e61ad15aece0f1342af0780074bc",
+      "destination_sha256_at_packaging": "bdc58260ceb90b1e1c3d0c7d05596483d8748728cc2e95a5433db0a045df046c"
+    },
+    {
+      "source_commit": "b56e24041d0f5cb9025543616aa900b25f1679d5",
+      "source_path": "tests/test_utils/test_domino_moe_metrics.py",
+      "destination": "examples/corope/tests/test_moe_metrics.py",
+      "original_sha256": "b7ba1d902ba3c1d24210ba92c03a51ca44d69aef9745853a5358e715ee44e7dc",
+      "destination_sha256_at_packaging": "4832518bc31d4814707e25b76041adda09b956683d9f3f66a5ed3b6a1bc48b67"
+    },
+    {
+      "source_commit": "6e30151307c41a5aeeec92975ef70de11e7a5628",
+      "source_path": "mcore_pretrain/train.py",
+      "destination": "examples/corope/train.py",
+      "original_sha256": "c5326cb3942259f70aefe9ada27f9b0a1040cb40ce9dfb1b25589db53a19eb39",
+      "destination_sha256_at_packaging": "e5fbee1cbac39050ace26afa33226eeda311ed9cc60b29c64c9d1117b27d906d"
+    },
+    {
+      "source_commit": "6e30151307c41a5aeeec92975ef70de11e7a5628",
+      "source_path": "specforge/domino_moe.py",
+      "destination": "examples/corope/domino_moe.py",
+      "original_sha256": "8c03073a17936ed9f247bec20e9e8c2a4def41e65337fa7bfce7315a9146fcaa",
+      "destination_sha256_at_packaging": "bdc58260ceb90b1e1c3d0c7d05596483d8748728cc2e95a5433db0a045df046c"
+    },
+    {
+      "source_commit": "6e30151307c41a5aeeec92975ef70de11e7a5628",
+      "source_path": "tests/test_utils/test_domino_moe_bf16.py",
+      "destination": "examples/corope/tests/test_moe_bf16.py",
+      "original_sha256": "a7fbdb297d1bd6eb2b33e1d66cec46c3c9d66ea4c5e32e82ce422bac7f53e42b",
+      "destination_sha256_at_packaging": "f4b229d37463f020b880300243d331455573735e223eaf11c1c08928fd1057ba"
+    }
+  ],
+  "relocation_changes": [
+    "Example-relative module paths",
+    "Explicit target model path",
+    "Optional external joint-model checkout",
+    "Environment-configured proxy and W&B",
+    "One shared frozen-head kernel",
+    "isort/black formatting"
+  ]
+}

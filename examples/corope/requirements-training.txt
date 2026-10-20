@@ -1,0 +1,9 @@
+# Requires a CUDA 13 development container and matching compiled extensions.
+# Install torch from https://download.pytorch.org/whl/cu130 first.
+-r requirements-cpu.txt
+transformer-engine[pytorch]==2.20.2
+liger-kernel==0.8.2
+triton==3.6.0
+wandb==0.28.1
+packaging>=24.2
+# Megatron Core is imported from this checkout by run.sh.

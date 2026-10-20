@@ -1,0 +1,9 @@
+# Install in an isolated Python 3.12 environment.
+torch==2.11.0
+transformers==5.12.1
+numpy==2.3.5
+safetensors==0.8.0
+tokenizers==0.22.2
+pyarrow==24.0.0
+requests==2.34.2
+pytest==9.1.1

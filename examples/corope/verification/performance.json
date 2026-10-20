@@ -1,0 +1,1192 @@
+{
+  "runs": {
+    "input_r1": {
+      "mean_ms": 42.504321315458846,
+      "median_ms": 38.25421258807182,
+      "ordinary_mean_ms": 42.26052815382404,
+      "ordinary_median_ms": 38.24417293071747,
+      "effective_labels_per_second": 184031.708190055,
+      "measured_steps": 350,
+      "valid_labels": 2737750,
+      "validation": {
+        "weighted_nll": 3.9201113491876964
+      },
+      "domains": {
+        "fineweb": {
+          "nll": 4.305405545848317,
+          "accuracy": 0.2699410105155168,
+          "tokens": 15596
+        },
+        "stackedu": {
+          "nll": 3.3374773523250933,
+          "accuracy": 0.3957727360868722,
+          "tokens": 15471
+        },
+        "finemath": {
+          "nll": 3.3468627560684387,
+          "accuracy": 0.34594872453897063,
+          "tokens": 15563
+        }
+      },
+      "final_loss": 3.8269426822662354,
+      "peak_allocated_mib": 5263.5849609375,
+      "export_sha256": "d408cd0f325c69c5915bf3fe09c032c33c15e27265ba7385ed52a1bcceff0ad3"
+    },
+    "bfloat16_r1": {
+      "mean_ms": 33.51595363446645,
+      "median_ms": 29.261253774166107,
+      "ordinary_mean_ms": 33.3063628730899,
+      "ordinary_median_ms": 29.252618551254272,
+      "effective_labels_per_second": 233385.65694573833,
+      "measured_steps": 350,
+      "valid_labels": 2737750,
+      "validation": {
+        "weighted_nll": 3.9197618003628043
+      },
+      "domains": {
+        "fineweb": {
+          "nll": 4.3048820024249235,
+          "accuracy": 0.27026160553988204,
+          "tokens": 15596
+        },
+        "stackedu": {
+          "nll": 3.3374052651033166,
+          "accuracy": 0.3962898325900071,
+          "tokens": 15471
+        },
+        "finemath": {
+          "nll": 3.3467577294359345,
+          "accuracy": 0.34652701921223417,
+          "tokens": 15563
+        }
+      },
+      "final_loss": 3.826802968978882,
+      "peak_allocated_mib": 5313.3974609375,
+      "export_sha256": "1f7ee77b6f7cd32dd20a86bbce309e38a82be0e86e6e66c954711bd7ded554b3"
+    },
+    "bfloat16_r2": {
+      "mean_ms": 32.28393937860216,
+      "median_ms": 29.205117374658585,
+      "ordinary_mean_ms": 32.050240165811935,
+      "ordinary_median_ms": 29.19308841228485,
+      "effective_labels_per_second": 242292.081068873,
+      "measured_steps": 350,
+      "valid_labels": 2737750,
+      "validation": {
+        "weighted_nll": 3.9197618003628043
+      },
+      "domains": {
+        "fineweb": {
+          "nll": 4.3048820024249235,
+          "accuracy": 0.27026160553988204,
+          "tokens": 15596
+        },
+        "stackedu": {
+          "nll": 3.3374052651033166,
+          "accuracy": 0.3962898325900071,
+          "tokens": 15471
+        },
+        "finemath": {
+          "nll": 3.3467577294359345,
+          "accuracy": 0.34652701921223417,
+          "tokens": 15563
+        }
+      },
+      "final_loss": 3.826802968978882,
+      "peak_allocated_mib": 5313.3974609375,
+      "export_sha256": "1f7ee77b6f7cd32dd20a86bbce309e38a82be0e86e6e66c954711bd7ded554b3"
+    },
+    "input_r2": {
+      "mean_ms": 42.3081400351865,
+      "median_ms": 38.48166763782501,
+      "ordinary_mean_ms": 42.025382747281746,
+      "ordinary_median_ms": 38.476310670375824,
+      "effective_labels_per_second": 184885.05641319614,
+      "measured_steps": 350,
+      "valid_labels": 2737750,
+      "validation": {
+        "weighted_nll": 3.9201113491876964
+      },
+      "domains": {
+        "fineweb": {
+          "nll": 4.305405545848317,
+          "accuracy": 0.2699410105155168,
+          "tokens": 15596
+        },
+        "stackedu": {
+          "nll": 3.3374773523250933,
+          "accuracy": 0.3957727360868722,
+          "tokens": 15471
+        },
+        "finemath": {
+          "nll": 3.3468627560684387,
+          "accuracy": 0.34594872453897063,
+          "tokens": 15563
+        }
+      },
+      "final_loss": 3.8269426822662354,
+      "peak_allocated_mib": 5263.5849609375,
+      "export_sha256": "d408cd0f325c69c5915bf3fe09c032c33c15e27265ba7385ed52a1bcceff0ad3"
+    }
+  },
+  "aggregate": {
+    "mean_ms": {
+      "input": 42.406230675322675,
+      "bfloat16": 32.899946506534306
+    },
+    "throughput_gain": 0.28894527736998943,
+    "step_time_reduction": 0.2241718732695649
+  },
+  "repeated_exports_bitwise_equal": {
+    "input": true,
+    "bfloat16": true
+  },
+  "probe": {
+    "checkpoint": "<external-artifact>/export",
+    "torch": "2.11.0+cu130",
+    "device": "NVIDIA H100 80GB HBM3",
+    "numerics": [
+      {
+        "step": 51,
+        "valid_labels": 3849,
+        "fp32_loss": 3.7794265747070312,
+        "bf16_loss": 3.7797751426696777,
+        "loss_delta": 0.0003485679626464844,
+        "route_indices_equal": true,
+        "routing_counts_equal": true,
+        "gradients": {
+          "input_proj.weight": {
+            "relative_rms": 0.009075365029275417,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.999958872795105,
+            "finite": true
+          },
+          "layers.0.input_layernorm.weight": {
+            "relative_rms": 0.011785155162215233,
+            "max_abs": 0.00021569058299064636,
+            "cosine": 0.9999523758888245,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_proj.weight": {
+            "relative_rms": 0.008215160109102726,
+            "max_abs": 6.103515625e-05,
+            "cosine": 0.9999663829803467,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_qkv.weight": {
+            "relative_rms": 0.008421623148024082,
+            "max_abs": 0.00012969970703125,
+            "cosine": 0.9999644756317139,
+            "finite": true
+          },
+          "layers.0.self_attention.q_layernorm.weight": {
+            "relative_rms": 0.007671435829252005,
+            "max_abs": 3.9062462747097015e-05,
+            "cosine": 0.9999713897705078,
+            "finite": true
+          },
+          "layers.0.self_attention.k_layernorm.weight": {
+            "relative_rms": 0.0077246711589396,
+            "max_abs": 5.1619019359350204e-05,
+            "cosine": 0.9999719262123108,
+            "finite": true
+          },
+          "layers.0.pre_mlp_layernorm.weight": {
+            "relative_rms": 0.009872648864984512,
+            "max_abs": 0.00019970256835222244,
+            "cosine": 0.9999540448188782,
+            "finite": true
+          },
+          "layers.0.mlp.experts.up_gate": {
+            "relative_rms": 0.008050751872360706,
+            "max_abs": 3.1312694773077965e-05,
+            "cosine": 0.9999676942825317,
+            "finite": true
+          },
+          "layers.0.mlp.experts.down": {
+            "relative_rms": 0.008038552477955818,
+            "max_abs": 3.217061748728156e-05,
+            "cosine": 0.999967634677887,
+            "finite": true
+          },
+          "layers.0.mlp.experts.router.weight": {
+            "relative_rms": 0.007834239862859249,
+            "max_abs": 9.742157999426126e-05,
+            "cosine": 0.9999693632125854,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.up_proj.weight": {
+            "relative_rms": 0.0072118379175662994,
+            "max_abs": 4.291534423828125e-05,
+            "cosine": 0.9999739527702332,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.gate_proj.weight": {
+            "relative_rms": 0.007002939470112324,
+            "max_abs": 4.57763671875e-05,
+            "cosine": 0.9999754428863525,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.down_proj.weight": {
+            "relative_rms": 0.006792955566197634,
+            "max_abs": 6.103515625e-05,
+            "cosine": 0.9999768137931824,
+            "finite": true
+          },
+          "final_norm.weight": {
+            "relative_rms": 0.0039268191903829575,
+            "max_abs": 0.00020737946033477783,
+            "cosine": 0.9999958872795105,
+            "finite": true
+          },
+          "bridge.weight": {
+            "relative_rms": 0.0074015771970152855,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999725818634033,
+            "finite": true
+          }
+        }
+      },
+      {
+        "step": 52,
+        "valid_labels": 3991,
+        "fp32_loss": 3.85243821144104,
+        "bf16_loss": 3.8520522117614746,
+        "loss_delta": -0.0003859996795654297,
+        "route_indices_equal": true,
+        "routing_counts_equal": true,
+        "gradients": {
+          "input_proj.weight": {
+            "relative_rms": 0.009269099682569504,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999570846557617,
+            "finite": true
+          },
+          "layers.0.input_layernorm.weight": {
+            "relative_rms": 0.005854415241628885,
+            "max_abs": 5.4175034165382385e-05,
+            "cosine": 0.9999842643737793,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_proj.weight": {
+            "relative_rms": 0.00852843839675188,
+            "max_abs": 5.340576171875e-05,
+            "cosine": 0.9999635219573975,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_qkv.weight": {
+            "relative_rms": 0.008591234683990479,
+            "max_abs": 0.0001373291015625,
+            "cosine": 0.9999631643295288,
+            "finite": true
+          },
+          "layers.0.self_attention.q_layernorm.weight": {
+            "relative_rms": 0.00950707495212555,
+            "max_abs": 8.447456639260054e-05,
+            "cosine": 0.999954879283905,
+            "finite": true
+          },
+          "layers.0.self_attention.k_layernorm.weight": {
+            "relative_rms": 0.00967300683259964,
+            "max_abs": 7.675448432564735e-05,
+            "cosine": 0.9999532699584961,
+            "finite": true
+          },
+          "layers.0.pre_mlp_layernorm.weight": {
+            "relative_rms": 0.0060077751986682415,
+            "max_abs": 9.490922093391418e-05,
+            "cosine": 0.9999842047691345,
+            "finite": true
+          },
+          "layers.0.mlp.experts.up_gate": {
+            "relative_rms": 0.008469508029520512,
+            "max_abs": 7.817073492333293e-05,
+            "cosine": 0.99996417760849,
+            "finite": true
+          },
+          "layers.0.mlp.experts.down": {
+            "relative_rms": 0.00825683493167162,
+            "max_abs": 2.8416281566023827e-05,
+            "cosine": 0.9999659657478333,
+            "finite": true
+          },
+          "layers.0.mlp.experts.router.weight": {
+            "relative_rms": 0.007446411065757275,
+            "max_abs": 6.999238394200802e-05,
+            "cosine": 0.9999721646308899,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.up_proj.weight": {
+            "relative_rms": 0.007087637670338154,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999749660491943,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.gate_proj.weight": {
+            "relative_rms": 0.0072296857833862305,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999738335609436,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.down_proj.weight": {
+            "relative_rms": 0.007033258676528931,
+            "max_abs": 3.147125244140625e-05,
+            "cosine": 0.999975323677063,
+            "finite": true
+          },
+          "final_norm.weight": {
+            "relative_rms": 0.011484034359455109,
+            "max_abs": 0.000544130802154541,
+            "cosine": 0.9999355673789978,
+            "finite": true
+          },
+          "bridge.weight": {
+            "relative_rms": 0.00787371676415205,
+            "max_abs": 3.814697265625e-05,
+            "cosine": 0.9999690651893616,
+            "finite": true
+          }
+        }
+      },
+      {
+        "step": 53,
+        "valid_labels": 3870,
+        "fp32_loss": 3.7597484588623047,
+        "bf16_loss": 3.759873390197754,
+        "loss_delta": 0.00012493133544921875,
+        "route_indices_equal": true,
+        "routing_counts_equal": true,
+        "gradients": {
+          "input_proj.weight": {
+            "relative_rms": 0.008750375360250473,
+            "max_abs": 3.814697265625e-05,
+            "cosine": 0.9999617338180542,
+            "finite": true
+          },
+          "layers.0.input_layernorm.weight": {
+            "relative_rms": 0.006371384020894766,
+            "max_abs": 0.0003729686141014099,
+            "cosine": 0.9999949336051941,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_proj.weight": {
+            "relative_rms": 0.008357654325664043,
+            "max_abs": 9.1552734375e-05,
+            "cosine": 0.9999650120735168,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_qkv.weight": {
+            "relative_rms": 0.008452179841697216,
+            "max_abs": 0.000152587890625,
+            "cosine": 0.9999642968177795,
+            "finite": true
+          },
+          "layers.0.self_attention.q_layernorm.weight": {
+            "relative_rms": 0.007082835305482149,
+            "max_abs": 3.755255602300167e-05,
+            "cosine": 0.9999752044677734,
+            "finite": true
+          },
+          "layers.0.self_attention.k_layernorm.weight": {
+            "relative_rms": 0.00781683623790741,
+            "max_abs": 4.609033931046724e-05,
+            "cosine": 0.999969482421875,
+            "finite": true
+          },
+          "layers.0.pre_mlp_layernorm.weight": {
+            "relative_rms": 0.010106083005666733,
+            "max_abs": 0.00017654243856668472,
+            "cosine": 0.9999490976333618,
+            "finite": true
+          },
+          "layers.0.mlp.experts.up_gate": {
+            "relative_rms": 0.008140292018651962,
+            "max_abs": 8.128047920763493e-05,
+            "cosine": 0.9999669194221497,
+            "finite": true
+          },
+          "layers.0.mlp.experts.down": {
+            "relative_rms": 0.007858233526349068,
+            "max_abs": 3.0774506740272045e-05,
+            "cosine": 0.9999690651893616,
+            "finite": true
+          },
+          "layers.0.mlp.experts.router.weight": {
+            "relative_rms": 0.007444488350301981,
+            "max_abs": 8.75336118042469e-05,
+            "cosine": 0.9999723434448242,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.up_proj.weight": {
+            "relative_rms": 0.006897798273712397,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999761581420898,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.gate_proj.weight": {
+            "relative_rms": 0.006907954346388578,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999761581420898,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.down_proj.weight": {
+            "relative_rms": 0.006773814558982849,
+            "max_abs": 4.9591064453125e-05,
+            "cosine": 0.9999769926071167,
+            "finite": true
+          },
+          "final_norm.weight": {
+            "relative_rms": 0.009875010699033737,
+            "max_abs": 0.00029867328703403473,
+            "cosine": 0.9999557137489319,
+            "finite": true
+          },
+          "bridge.weight": {
+            "relative_rms": 0.007545835338532925,
+            "max_abs": 4.57763671875e-05,
+            "cosine": 0.9999715089797974,
+            "finite": true
+          }
+        }
+      },
+      {
+        "step": 54,
+        "valid_labels": 4028,
+        "fp32_loss": 3.6500062942504883,
+        "bf16_loss": 3.6498708724975586,
+        "loss_delta": -0.0001354217529296875,
+        "route_indices_equal": true,
+        "routing_counts_equal": true,
+        "gradients": {
+          "input_proj.weight": {
+            "relative_rms": 0.009323492646217346,
+            "max_abs": 2.288818359375e-05,
+            "cosine": 0.999956488609314,
+            "finite": true
+          },
+          "layers.0.input_layernorm.weight": {
+            "relative_rms": 0.007418094202876091,
+            "max_abs": 0.00029050931334495544,
+            "cosine": 0.9999915957450867,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_proj.weight": {
+            "relative_rms": 0.008677694015204906,
+            "max_abs": 5.340576171875e-05,
+            "cosine": 0.9999623894691467,
+            "finite": true
+          },
+          "layers.0.self_attention.linear_qkv.weight": {
+            "relative_rms": 0.008604801259934902,
+            "max_abs": 0.00013709068298339844,
+            "cosine": 0.9999630451202393,
+            "finite": true
+          },
+          "layers.0.self_attention.q_layernorm.weight": {
+            "relative_rms": 0.009570816531777382,
+            "max_abs": 5.244254134595394e-05,
+            "cosine": 0.9999573826789856,
+            "finite": true
+          },
+          "layers.0.self_attention.k_layernorm.weight": {
+            "relative_rms": 0.009208930656313896,
+            "max_abs": 4.459754563868046e-05,
+            "cosine": 0.9999575614929199,
+            "finite": true
+          },
+          "layers.0.pre_mlp_layernorm.weight": {
+            "relative_rms": 0.0055280341766774654,
+            "max_abs": 4.5759312342852354e-05,
+            "cosine": 0.99998539686203,
+            "finite": true
+          },
+          "layers.0.mlp.experts.up_gate": {
+            "relative_rms": 0.008590767160058022,
+            "max_abs": 4.639971302822232e-05,
+            "cosine": 0.999963104724884,
+            "finite": true
+          },
+          "layers.0.mlp.experts.down": {
+            "relative_rms": 0.008500518277287483,
+            "max_abs": 2.9073795303702354e-05,
+            "cosine": 0.9999639391899109,
+            "finite": true
+          },
+          "layers.0.mlp.experts.router.weight": {
+            "relative_rms": 0.00814372580498457,
+            "max_abs": 6.44405372440815e-05,
+            "cosine": 0.9999669194221497,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.up_proj.weight": {
+            "relative_rms": 0.00745802465826273,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999722242355347,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.gate_proj.weight": {
+            "relative_rms": 0.00766238197684288,
+            "max_abs": 6.103515625e-05,
+            "cosine": 0.9999706745147705,
+            "finite": true
+          },
+          "layers.0.mlp.experts.shared.down_proj.weight": {
+            "relative_rms": 0.0073775541968643665,
+            "max_abs": 3.0517578125e-05,
+            "cosine": 0.9999728202819824,
+            "finite": true
+          },
+          "final_norm.weight": {
+            "relative_rms": 0.011061716824769974,
+            "max_abs": 0.00020398199558258057,
+            "cosine": 0.9999452233314514,
+            "finite": true
+          },
+          "bridge.weight": {
+            "relative_rms": 0.008032622747123241,
+            "max_abs": 4.1961669921875e-05,
+            "cosine": 0.9999677538871765,
+            "finite": true
+          }
+        }
+      }
+    ],
+    "identical_repeated_bf16_gradients": true,
+    "timing": {
+      "input": {
+        "median_ms": 12.734081596136093,
+        "mean_ms": 12.835836907227835,
+        "samples_ms": [
+          12.356877326965332,
+          12.268200516700745,
+          12.453146278858185,
+          12.22614198923111,
+          12.362167239189148,
+          12.7042755484581,
+          13.050027191638947,
+          12.760400772094727,
+          12.922734022140503,
+          12.632399797439575,
+          12.898214161396027,
+          12.893334031105042,
+          13.12534511089325,
+          13.627372682094574,
+          12.860164046287537,
+          12.752316892147064,
+          12.883387506008148,
+          12.595705687999725,
+          12.723274528980255,
+          12.457281351089478,
+          12.838900089263916,
+          12.617029249668121,
+          12.924611568450928,
+          12.934818863868713,
+          13.067618012428284,
+          13.114213943481445,
+          12.991555035114288,
+          12.527421116828918,
+          12.772895395755768,
+          12.497380375862122,
+          12.913748621940613,
+          12.775853276252747,
+          12.857839465141296,
+          12.831032276153564,
+          13.14445585012436,
+          12.577436864376068,
+          12.816183269023895,
+          12.630477547645569,
+          12.741543352603912,
+          12.927539646625519,
+          12.92942464351654,
+          14.006495475769043,
+          12.538976967334747,
+          12.4564990401268,
+          12.742340564727783,
+          19.006848335266113,
+          13.060450553894043,
+          12.592807412147522,
+          12.683525681495667,
+          12.636274099349976,
+          12.726619839668274,
+          12.468166649341583,
+          12.46604323387146,
+          12.50215619802475,
+          12.47292011976242,
+          12.244582176208496,
+          12.385770678520203,
+          12.28988915681839,
+          12.506164610385895,
+          12.378938496112823
+        ]
+      },
+      "bfloat16": {
+        "median_ms": 4.096608608961105,
+        "mean_ms": 4.106925303737323,
+        "samples_ms": [
+          3.8770511746406555,
+          3.8748085498809814,
+          4.1930824518203735,
+          3.7961751222610474,
+          3.915362060070038,
+          3.868475556373596,
+          4.267759621143341,
+          4.136897623538971,
+          4.263885319232941,
+          3.8833916187286377,
+          4.323236644268036,
+          4.366375505924225,
+          4.550069570541382,
+          4.238627851009369,
+          4.158981144428253,
+          4.122994840145111,
+          4.254952073097229,
+          4.131048917770386,
+          4.146255552768707,
+          3.8769394159317017,
+          4.04743105173111,
+          3.986768424510956,
+          4.376567900180817,
+          3.8807839155197144,
+          4.457153379917145,
+          4.13919985294342,
+          4.33378666639328,
+          3.9012283086776733,
+          4.106536507606506,
+          3.9857029914855957,
+          4.179544746875763,
+          3.901079297065735,
+          4.509598016738892,
+          4.190795123577118,
+          4.349656403064728,
+          4.465565085411072,
+          4.199311137199402,
+          4.086680710315704,
+          4.175752401351929,
+          4.062764346599579,
+          5.3259581327438354,
+          4.237189888954163,
+          3.870531916618347,
+          3.803662955760956,
+          4.124872386455536,
+          3.9458945393562317,
+          4.111342132091522,
+          4.001162946224213,
+          3.980211913585663,
+          3.9844512939453125,
+          4.189223051071167,
+          4.042699933052063,
+          3.9780810475349426,
+          3.9156749844551086,
+          3.9478838443756104,
+          3.8243532180786133,
+          3.891296684741974,
+          3.9004236459732056,
+          3.954194486141205,
+          3.804132342338562
+        ]
+      }
+    }
+  },
+  "profile": {
+    "rank0": {
+      "captured_steps": 5,
+      "kernel_sum_ms_per_step": 24.509066799999985,
+      "kernel_union_ms_per_step": 24.508988134765623,
+      "groups": {
+        "nccl": {
+          "ms_per_step": 2.0320772000000002,
+          "fraction_of_kernel_sum": 0.08291124327916072
+        },
+        "other_model_optimizer": {
+          "ms_per_step": 7.893123999999988,
+          "fraction_of_kernel_sum": 0.3220491446863245
+        },
+        "expert_grouped_gemm": {
+          "ms_per_step": 0.6557305999999999,
+          "fraction_of_kernel_sum": 0.026754613113217363
+        },
+        "head_ce_dgrad": {
+          "ms_per_step": 13.928134999999997,
+          "fraction_of_kernel_sum": 0.5682849989212974
+        }
+      },
+      "grouped_types": {
+        "['c10::BFloat16', 'c10::BFloat16', 'int', '', '']": 30
+      },
+      "top_kernels": [
+        {
+          "name": "nvjet_sm90_tst_256x128_64x4_1x2_h_bz_coopA_splitK_NNT",
+          "calls": 40,
+          "ms_per_step": 6.190470800000001
+        },
+        {
+          "name": "nvjet_sm90_tst_256x128_64x4_1x2_h_bz_coopA_TNT",
+          "calls": 50,
+          "ms_per_step": 5.7879036
+        },
+        {
+          "name": "liger_cross_entropy_kernel",
+          "calls": 40,
+          "ms_per_step": 1.2099461999999999
+        },
+        {
+          "name": "ncclDevKernel_ReduceScatter_Sum_f32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+          "calls": 5,
+          "ms_per_step": 0.9889087999999999
+        },
+        {
+          "name": "ncclDevKernel_AllGather_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+          "calls": 5,
+          "ms_per_step": 0.8479872000000002
+        },
+        {
+          "name": "nvjet_sm90_tst_128x160_64x5_2x1_v_bz_TNT",
+          "calls": 5,
+          "ms_per_step": 0.7837568000000001
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "calls": 135,
+          "ms_per_step": 0.7453506000000003
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>)",
+          "calls": 135,
+          "ms_per_step": 0.6515910000000001
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<8, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "calls": 195,
+          "ms_per_step": 0.6091510000000002
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "calls": 95,
+          "ms_per_step": 0.5804356000000002
+        },
+        {
+          "name": "void multi_tensor_apply_kernel<TensorListMetadata<4, false>, transformer_engine::multi_tensor_adam::AdamFunctor<float, float, float, float, int>, float, float, float, float, float, float, transformer_engine::multi_tensor_adam::adamMode_t, float>(long, int volatile*, TensorListMetadata<4, false>, transformer_engine::multi_tensor_adam::AdamFunctor<float, float, float, float, int>, float, float, float, float, float, float, transformer_engine::multi_tensor_adam::adamMode_t, float)",
+          "calls": 20,
+          "ms_per_step": 0.5536834
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "calls": 70,
+          "ms_per_step": 0.4059532
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "calls": 80,
+          "ms_per_step": 0.3964489999999997
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "calls": 90,
+          "ms_per_step": 0.3711163999999997
+        },
+        {
+          "name": "_ZN7cutlass13device_kernelIN2at4cuda6detail25enable_3x_kernel_for_sm9xINS_4gemm6kernel13GemmUniversalINS5_17GroupProblemShapeIN4cute5tupleIJiiiEEEEENS5_10collective13CollectiveMmaINS5_39MainloopSm90ArrayTmaGmmaWarpSpecializedILi4ENSA_IJNS9_1CILi2EEENSG_ILi1EEESI_EEENS5_43KernelPtrArrayTmaWarpSpecializedCooperativeEEENSA_IJNSG_ILi128EEENSG_ILi256EEENSG_ILi64EEEEEENS_10bfloat16_tEPNSA_IJlSI_NSG_ILi0EEEEEESQ_ST_NS9_8TiledMMAINS9_8MMA_AtomIJNS9_4SM904GMMA28MMA_64x256x16_F32BF16BF16_SSILNSX_5MajorE0ELSZ_0ELNSX_7ScaleInE1ELS10_1EEEEEENS9_6LayoutISJ_NSA_IJSI_SR_SR_EEEEENSA_IJNS9_10UnderscoreES16_S16_EEEEENS9_13SM90_TMA_LOADENS9_14ComposedLayoutINS9_7SwizzleILi3ELi4ELi3EEENS9_18smem_ptr_flag_bitsILi16EEENS13_INSA_IJNSG_ILi8EEESO_EEENSA_IJSO_SI_EEEEEEEvNS9_8identityENS9_23SM90_TMA_LOAD_MULTICASTES1J_vS1K_EENS_8epilogue10collective18CollectiveEpilogueINS1N_30Sm90PtrArrayTmaWarpSpecializedILi4ELi2ELi16ELb0ELb0ELi2EEEJSP_NSA_IJSM_NSG_ILi32EEEEEEvST_SQ_ST_NS1N_6fusion15FusionCallbacksIS1R_NS1U_17LinearCombinationISQ_fSQ_fLNS_15FloatRoundStyleE2EEESP_S1T_JEEES19_NS1A_INS1B_ILi2ELi4ELi3EEES1E_NS13_INSA_IJS1F_S1S_EEENSA_IJS1S_SI_EEEEEEENS9_17SM75_U32x4_LDSM_NENS9_14SM90_TMA_STOREES24_NS9_17SM90_U32x4_STSM_NENS9_9Copy_AtomIJS27_NS_6half_tEEEEvEEEvvEEEEEEvNT_6ParamsE",
+          "calls": 10,
+          "ms_per_step": 0.21643479999999998
+        }
+      ]
+    },
+    "rank1": {
+      "captured_steps": 5,
+      "kernel_sum_ms_per_step": 24.554751,
+      "kernel_union_ms_per_step": 24.55467138671875,
+      "groups": {
+        "nccl": {
+          "ms_per_step": 1.8216433999999997,
+          "fraction_of_kernel_sum": 0.07418700356603086
+        },
+        "other_model_optimizer": {
+          "ms_per_step": 7.991260199999999,
+          "fraction_of_kernel_sum": 0.32544659890870004
+        },
+        "expert_grouped_gemm": {
+          "ms_per_step": 0.6689814000000001,
+          "fraction_of_kernel_sum": 0.027244479082683435
+        },
+        "head_ce_dgrad": {
+          "ms_per_step": 14.072865999999996,
+          "fraction_of_kernel_sum": 0.5731219184425856
+        }
+      },
+      "grouped_types": {
+        "['c10::BFloat16', 'c10::BFloat16', 'int', '', '']": 30
+      },
+      "top_kernels": [
+        {
+          "name": "nvjet_sm90_tst_256x128_64x4_1x2_h_bz_coopA_splitK_NNT",
+          "calls": 40,
+          "ms_per_step": 6.2311836
+        },
+        {
+          "name": "nvjet_sm90_tst_256x128_64x4_1x2_h_bz_coopA_TNT",
+          "calls": 50,
+          "ms_per_step": 5.8827278
+        },
+        {
+          "name": "liger_cross_entropy_kernel",
+          "calls": 40,
+          "ms_per_step": 1.2149666
+        },
+        {
+          "name": "ncclDevKernel_ReduceScatter_Sum_f32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+          "calls": 5,
+          "ms_per_step": 0.9844828
+        },
+        {
+          "name": "ncclDevKernel_AllGather_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+          "calls": 5,
+          "ms_per_step": 0.8091028
+        },
+        {
+          "name": "nvjet_sm90_tst_128x160_64x5_2x1_v_bz_TNT",
+          "calls": 5,
+          "ms_per_step": 0.7926354000000001
+        },
+        {
+          "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, 4, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1> >(int, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast<1>)",
+          "calls": 135,
+          "ms_per_step": 0.7535576000000002
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>)",
+          "calls": 135,
+          "ms_per_step": 0.6525084
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<8, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+          "calls": 195,
+          "ms_per_step": 0.6095182000000008
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "calls": 95,
+          "ms_per_step": 0.5841676000000001
+        },
+        {
+          "name": "void multi_tensor_apply_kernel<TensorListMetadata<4, false>, transformer_engine::multi_tensor_adam::AdamFunctor<float, float, float, float, int>, float, float, float, float, float, float, transformer_engine::multi_tensor_adam::adamMode_t, float>(long, int volatile*, TensorListMetadata<4, false>, transformer_engine::multi_tensor_adam::AdamFunctor<float, float, float, float, int>, float, float, float, float, float, float, transformer_engine::multi_tensor_adam::adamMode_t, float)",
+          "calls": 20,
+          "ms_per_step": 0.5553617999999999
+        },
+        {
+          "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> > const&)::{lambda(int)#1})",
+          "calls": 70,
+          "ms_per_step": 0.41281460000000003
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+          "calls": 80,
+          "ms_per_step": 0.40772599999999953
+        },
+        {
+          "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul> >(int, at::native::BinaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 3ul>)",
+          "calls": 90,
+          "ms_per_step": 0.37220659999999983
+        },
+        {
+          "name": "_ZN7cutlass13device_kernelIN2at4cuda6detail25enable_3x_kernel_for_sm9xINS_4gemm6kernel13GemmUniversalINS5_17GroupProblemShapeIN4cute5tupleIJiiiEEEEENS5_10collective13CollectiveMmaINS5_39MainloopSm90ArrayTmaGmmaWarpSpecializedILi4ENSA_IJNS9_1CILi2EEENSG_ILi1EEESI_EEENS5_43KernelPtrArrayTmaWarpSpecializedCooperativeEEENSA_IJNSG_ILi128EEENSG_ILi256EEENSG_ILi64EEEEEENS_10bfloat16_tEPNSA_IJlSI_NSG_ILi0EEEEEESQ_ST_NS9_8TiledMMAINS9_8MMA_AtomIJNS9_4SM904GMMA28MMA_64x256x16_F32BF16BF16_SSILNSX_5MajorE0ELSZ_0ELNSX_7ScaleInE1ELS10_1EEEEEENS9_6LayoutISJ_NSA_IJSI_SR_SR_EEEEENSA_IJNS9_10UnderscoreES16_S16_EEEEENS9_13SM90_TMA_LOADENS9_14ComposedLayoutINS9_7SwizzleILi3ELi4ELi3EEENS9_18smem_ptr_flag_bitsILi16EEENS13_INSA_IJNSG_ILi8EEESO_EEENSA_IJSO_SI_EEEEEEEvNS9_8identityENS9_23SM90_TMA_LOAD_MULTICASTES1J_vS1K_EENS_8epilogue10collective18CollectiveEpilogueINS1N_30Sm90PtrArrayTmaWarpSpecializedILi4ELi2ELi16ELb0ELb0ELi2EEEJSP_NSA_IJSM_NSG_ILi32EEEEEEvST_SQ_ST_NS1N_6fusion15FusionCallbacksIS1R_NS1U_17LinearCombinationISQ_fSQ_fLNS_15FloatRoundStyleE2EEESP_S1T_JEEES19_NS1A_INS1B_ILi2ELi4ELi3EEES1E_NS13_INSA_IJS1F_S1S_EEENSA_IJS1S_SI_EEEEEEENS9_17SM75_U32x4_LDSM_NENS9_14SM90_TMA_STOREES24_NS9_17SM90_U32x4_STSM_NENS9_9Copy_AtomIJS27_NS_6half_tEEEEvEEEvvEEEEEEvNT_6ParamsE",
+          "calls": 10,
+          "ms_per_step": 0.2221964
+        }
+      ]
+    }
+  },
+  "resume": {
+    "export_tensors_bitwise_equal": 19,
+    "distributed_tensors_bitwise_equal": 20,
+    "common_state_tensors_bitwise_equal": 0,
+    "rng_tensors_bitwise_equal": 10,
+    "per_step_losses_grad_norms_counts_diagnostics_bitwise_equal": true,
+    "progress": {
+      "step": 6,
+      "tokens": 2858,
+      "source_tokens": [
+        1835,
+        452,
+        571
+      ]
+    },
+    "original_joint_loader_tensors_exact": 19,
+    "joint_loader": {
+      "weight_sha256": "9d57291d0bdf1771fe58f26725f6e0a10a363ed6d6358a1c194047eba6ec0d8e",
+      "loaded_keys": [
+        "context_transformer.final_norm.weight",
+        "context_transformer.input_proj.weight",
+        "context_transformer.layers.0.input_layernorm.weight",
+        "context_transformer.layers.0.mlp.balance_updates",
+        "context_transformer.layers.0.mlp.down",
+        "context_transformer.layers.0.mlp.router.weight",
+        "context_transformer.layers.0.mlp.routing_bias",
+        "context_transformer.layers.0.mlp.shared.down_proj.weight",
+        "context_transformer.layers.0.mlp.shared.gate_proj.weight",
+        "context_transformer.layers.0.mlp.shared.up_proj.weight",
+        "context_transformer.layers.0.mlp.up_gate",
+        "context_transformer.layers.0.post_attention_layernorm.weight",
+        "context_transformer.layers.0.self_attn.k_norm.weight",
+        "context_transformer.layers.0.self_attn.k_proj.weight",
+        "context_transformer.layers.0.self_attn.o_proj.weight",
+        "context_transformer.layers.0.self_attn.q_norm.weight",
+        "context_transformer.layers.0.self_attn.q_proj.weight",
+        "context_transformer.layers.0.self_attn.v_proj.weight",
+        "embed_proj.0.weight"
+      ],
+      "pretrain_extra": {
+        "step": 6,
+        "tokens": 2858,
+        "source_tokens": [
+          1835,
+          452,
+          571
+        ],
+        "sampler": {
+          "algorithm": "pcg64-global-domain-permutation-v1",
+          "data_sha256": "984e8bf301473fc01f44df5ad89b97df6f728563be16fe7dcf43f9d3803675d2",
+          "seed": 42,
+          "world_size": 2,
+          "micro_batch": 2,
+          "accumulation": 2,
+          "next_micro": 12,
+          "source_draws": [
+            30,
+            8,
+            10
+          ]
+        },
+        "data_sha256": "984e8bf301473fc01f44df5ad89b97df6f728563be16fe7dcf43f9d3803675d2",
+        "pretrain_window_tokens": 64
+      }
+    },
+    "passed": true
+  },
+  "changed_precision_resume_rejected": {
+    "passed": true,
+    "returncode": 1,
+    "reason": "Checkpoint recipe/environment/source identity differs"
+  },
+  "counts_candidate": {
+    "output_and_gradients_bitwise_equal": true,
+    "timing": {
+      "bincount": {
+        "median_ms": 3.8050860166549683,
+        "mean_ms": 3.8391441851854324,
+        "samples_ms": [
+          4.007838666439056,
+          3.7929490208625793,
+          3.7411078810691833,
+          3.916695713996887,
+          3.777928650379181,
+          3.7148967385292053,
+          3.8344115018844604,
+          3.775261342525482,
+          3.774896264076233,
+          3.7573054432868958,
+          3.7412643432617188,
+          3.797687590122223,
+          3.777921199798584,
+          3.8179829716682434,
+          3.790616989135742,
+          3.768548369407654,
+          3.8047656416893005,
+          3.759637475013733,
+          3.7590041756629944,
+          3.784783184528351,
+          3.8159117102622986,
+          3.8086548447608948,
+          3.8028955459594727,
+          3.842867910861969,
+          3.742121160030365,
+          3.7605836987495422,
+          3.759808838367462,
+          3.8681402802467346,
+          3.7799328565597534,
+          3.88471782207489,
+          3.80852073431015,
+          3.711797297000885,
+          3.7329792976379395,
+          3.9255917072296143,
+          3.883674740791321,
+          3.956422209739685,
+          3.767140209674835,
+          3.977730870246887,
+          3.8352757692337036,
+          3.8258731365203857,
+          4.004202783107758,
+          3.825455904006958,
+          3.805406391620636,
+          3.886803984642029,
+          3.762058913707733,
+          4.047207534313202,
+          3.980286419391632,
+          4.055581986904144,
+          3.9573758840560913,
+          4.001066088676453,
+          4.008695483207703,
+          3.9639919996261597,
+          3.915950655937195,
+          3.945380449295044,
+          4.128448665142059,
+          4.0236786007881165,
+          3.9767473936080933,
+          3.9130374789237976,
+          3.892183303833008,
+          4.0443167090415955,
+          3.8817748427391052,
+          3.99944931268692,
+          3.8692355155944824,
+          3.831051290035248,
+          3.9054453372955322,
+          3.7792325019836426,
+          3.7861019372940063,
+          3.7780478596687317,
+          3.796324133872986,
+          3.7497729063034058,
+          3.7433207035064697,
+          3.7446096539497375,
+          3.7552937865257263,
+          3.7424564361572266,
+          3.7536397576332092,
+          3.740161657333374,
+          3.7347227334976196,
+          3.774024546146393,
+          3.8945674896240234,
+          3.8005635142326355,
+          3.7868469953536987,
+          3.788962960243225,
+          3.758735954761505,
+          3.7366151809692383,
+          3.7421882152557373,
+          3.8311555981636047,
+          3.741540014743805,
+          3.755040466785431,
+          3.8848966360092163,
+          3.931283950805664,
+          3.8997679948806763,
+          3.7673786282539368,
+          3.925532102584839,
+          3.902062773704529,
+          3.8611292839050293,
+          3.766380250453949,
+          3.749549388885498,
+          3.774218261241913,
+          3.8574784994125366,
+          3.8698390126228333
+        ]
+      },
+      "fixed_scatter": {
+        "median_ms": 3.740280866622925,
+        "mean_ms": 3.7685561180114746,
+        "samples_ms": [
+          3.7232190370559692,
+          3.7865862250328064,
+          3.7071332335472107,
+          3.711782395839691,
+          3.66036593914032,
+          3.6706700921058655,
+          3.7024468183517456,
+          3.7724822759628296,
+          3.7714391946792603,
+          3.736153244972229,
+          3.773212432861328,
+          3.7016719579696655,
+          3.810413181781769,
+          3.720402717590332,
+          3.691740334033966,
+          3.7618130445480347,
+          3.772735595703125,
+          3.721572458744049,
+          3.6923736333847046,
+          3.7039145827293396,
+          3.9359480142593384,
+          3.728151321411133,
+          3.6993175745010376,
+          3.7745460867881775,
+          3.688499331474304,
+          3.6736950278282166,
+          3.723457455635071,
+          3.7588104605674744,
+          3.7700384855270386,
+          3.7922561168670654,
+          3.674529492855072,
+          3.6711692810058594,
+          3.8016438484191895,
+          3.8613080978393555,
+          3.818728029727936,
+          3.8833245635032654,
+          3.730952739715576,
+          3.9584562182426453,
+          3.756009042263031,
+          3.7399083375930786,
+          3.847286105155945,
+          3.837898373603821,
+          3.9225220680236816,
+          3.7459731101989746,
+          3.694102168083191,
+          3.6922693252563477,
+          3.7363097071647644,
+          3.789566457271576,
+          4.00746613740921,
+          3.930620849132538,
+          3.807052969932556,
+          3.970310091972351,
+          3.909759223461151,
+          3.784656524658203,
+          3.9833635091781616,
+          3.8293376564979553,
+          3.775268793106079,
+          3.90411913394928,
+          3.92325222492218,
+          3.906555473804474,
+          3.8523897528648376,
+          3.8638263940811157,
+          3.832392394542694,
+          3.8773640990257263,
+          3.823593258857727,
+          3.8037672638893127,
+          3.7349537014961243,
+          3.9371177554130554,
+          3.7195011973381042,
+          3.7087276577949524,
+          3.6888867616653442,
+          3.7317797541618347,
+          3.6987289786338806,
+          3.6767274141311646,
+          3.69977205991745,
+          3.668762743473053,
+          3.659471869468689,
+          3.6951154470443726,
+          3.7391409277915955,
+          3.6978349089622498,
+          3.6909133195877075,
+          3.751002252101898,
+          3.714151680469513,
+          3.6879703402519226,
+          3.702022135257721,
+          3.7163272500038147,
+          3.820747137069702,
+          3.6964938044548035,
+          3.763929009437561,
+          3.808155655860901,
+          3.6746710538864136,
+          3.6925673484802246,
+          3.737829625606537,
+          3.7325695157051086,
+          3.806494176387787,
+          3.8106366991996765,
+          3.7231892347335815,
+          3.6550164222717285,
+          3.789849579334259,
+          3.740653395652771
+        ]
+      }
+    }
+  },
+  "source_sha256": {
+    "specforge/domino_moe.py": "8c03073a17936ed9f247bec20e9e8c2a4def41e65337fa7bfce7315a9146fcaa",
+    "mcore_pretrain/train.py": "c5326cb3942259f70aefe9ada27f9b0a1040cb40ce9dfb1b25589db53a19eb39"
+  },
+  "implementation_commit": "6e30151307c41a5aeeec92975ef70de11e7a5628"
+}
